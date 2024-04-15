@@ -7,13 +7,13 @@ Differentiable Flexible Mechanical Metamaterials
 
 TODO: Add fancy image or gif
 
-## Why DifFlexMM?
+## 🌅 Why DifFlexMM?
 
 🚀 The goal of this framework is to push the boundary of designable dynamic behaviors achievable by nonlinear mechanical metamaterials.
 
 🤖 Through the power of differentiable simulations, the framework removes the typical limitations of metamaterial design e.g. periodicity, intuition-based design, manual tuning, single-task design, etc. and enables the automated discovery of non-periodic, multi-functional, and reprogrammable metamaterials in the nonlinear dynamic regime.
 
-## Overview
+## 🚁 Overview
 
 This repository provides a fully differentiable dynamic design framework for 2D flexible mechanical metamaterials i.e. a network of rigid units connected by flexible ligaments.
 The main physical ingredients of the model are:
@@ -24,7 +24,7 @@ The main physical ingredients of the model are:
 
 With these ingredients, flexible mechanical metamaterials define a rich space of nonlinear dynamic behaviors that can be navigated by the framework.
 
-From a high-level perspective, the framework facilitates the construction of the mapping between design parameters and the desired behavior of the metamaterial system.
+🔭 From a high-level perspective, the framework facilitates the construction of the mapping between design parameters and the desired behavior of the metamaterial system.
 
 ![Code mapping](docs/code_mapping.svg)
 
@@ -39,7 +39,7 @@ In particular, differentiability is provided with respect to:
 - Initial conditions: initial positions and velocities of the system.
 - and any other paramater present in the ControlParams data structure.
 
-## Paper
+## 📜 Paper
 
 This repository contains all the code developed for the paper:
 TODO: Add paper link
