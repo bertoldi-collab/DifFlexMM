@@ -42,6 +42,7 @@ In particular, differentiability is provided with respect to:
 
 The main entry point of the simulator is the [`setup_dynamic_solver(...)`](difflexmm/dynamics.py#L60) in the [`dynamics`](difflexmm/dynamics.py) module.
 This function takes all the fixed mappings (geometry, energy, loading, etc.) and returns a differentiable function that simulates the metamaterial dynamics.
+Arbitrary forward problems can be defined by chaining this simulator function with any desired objective function.
 
 ## 📜 Paper
 
