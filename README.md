@@ -32,13 +32,16 @@ With these ingredients, flexible mechanical metamaterials define a rich space of
 By leverging [JAX](https://github.com/google/jax), this complex mapping is implemented in a differentiable fashion, thus allowing gradients to flow through the entire dynamic simulation.
 In particular, differentiability is provided with respect to:
 
-- Geometric paramaters: arbitrary parametrizations can be defined in the geometry module.
-- Ligament paramaters: energy functions can be defined in the energy module.
-- Damping parameters: linear viscous damping as defined in the loading module.
+- Geometric paramaters: arbitrary parametrizations can be defined in the [`geometry`](difflexmm/geometry.py) module.
+- Ligament paramaters: energy functions can be defined in the [`energy`](difflexmm/energy.py) module.
+- Damping parameters: linear viscous damping as defined in the [`loading`](difflexmm/loading.py) module.
 - Driving parameters: arbitrary driving functions can be applied to any degree of freedom.
 - Loading parameters: arbitrary loading functions can be applied to any degree of freedom.
 - Initial conditions: initial positions and velocities of the system.
-- and any other paramater present in the ControlParams data structure.
+- and any other paramater present in the [`ControlParams`](difflexmm/utils.py#L145-L163) data structure.
+
+The main entry point of the simulator is the [`setup_dynamic_solver(...)`](difflexmm/dynamics.py#L60) in the [`dynamics`](difflexmm/dynamics.py) module.
+This function takes all the fixed mappings (geometry, energy, loading, etc.) and returns a differentiable function that simulates the metamaterial dynamics.
 
 ## 📜 Paper
 
