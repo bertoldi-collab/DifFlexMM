@@ -36,6 +36,7 @@ In particular, differentiability is provided with respect to:
 - Damping parameters: linear viscous damping as defined in the loading module.
 - Driving parameters: arbitrary driving functions can be applied to any degree of freedom.
 - Loading parameters: arbitrary loading functions can be applied to any degree of freedom.
+- Initial conditions: initial positions and velocities of the system.
 - and any other paramater present in the ControlParams data structure.
 
 ## Paper
