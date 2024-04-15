@@ -9,18 +9,18 @@ TODO: Add fancy image or gif
 
 ## Why DifFlexMM?
 
-The goal of this framework is to push the boundary of designable dynamic behaviors achievable by mechanical metamaterials.
+🚀 The goal of this framework is to push the boundary of designable dynamic behaviors achievable by mechanical metamaterials. 🚀
 
-Through the power of differentiable simulations, the framework removes the typical limitations of metamaterial design e.g. periodicity, intuition-based design, manual tuning, single-task design, etc. and enables the automated discovery of non-periodic, multi-functional, and reprogrammable metamaterials in the nonlinear dynamic regime.
+🤖 Through the power of differentiable simulations, the framework removes the typical limitations of metamaterial design e.g. periodicity, intuition-based design, manual tuning, single-task design, etc. and enables the automated discovery of non-periodic, multi-functional, and reprogrammable metamaterials in the nonlinear dynamic regime.
 
 ## Overview
 
 This repository provides a fully differentiable dynamic design framework for 2D flexible mechanical metamaterials i.e. a network of rigid units connected by flexible ligaments.
 The main physical ingredients of the model are:
 
-- Rigid-body kinematics of the units.
-- Elastic ligaments modeled by customizable energy functions.
-- Energy-based contact interactions between rigid units.
+- 🥌 Rigid-body kinematics of the units.
+- 🎈 Elastic ligaments modeled by customizable energy functions.
+- 💥 Energy-based contact interactions between rigid units.
 
 With these ingredients, flexible mechanical metamaterials define a rich space of nonlinear dynamic behaviors that can be navigated by the framework.
 
