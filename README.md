@@ -9,7 +9,7 @@ TODO: Add fancy image or gif
 
 ## Why DifFlexMM?
 
-🚀 The goal of this framework is to push the boundary of designable dynamic behaviors achievable by nonlinear mechanical metamaterials. 🚀
+🚀 The goal of this framework is to push the boundary of designable dynamic behaviors achievable by nonlinear mechanical metamaterials.
 
 🤖 Through the power of differentiable simulations, the framework removes the typical limitations of metamaterial design e.g. periodicity, intuition-based design, manual tuning, single-task design, etc. and enables the automated discovery of non-periodic, multi-functional, and reprogrammable metamaterials in the nonlinear dynamic regime.
 
