@@ -4,7 +4,7 @@
 [![Python tests](https://github.com/bertoldi-collab/DifFlexMM/actions/workflows/python_tests.yml/badge.svg)](https://github.com/bertoldi-collab/DifFlexMM/actions/workflows/python_tests.yml)
 [![arXiv](https://img.shields.io/badge/arXiv-2403.08078-b31b1b?logo=arXiv&logoColor=arXiv&labelColor=34495e)](https://arxiv.org/abs/2403.08078)
 
-Differentiable Flexible Mechanical Metamaterials
+**Dif**ferentiable **Flex**ible **M**echanical **M**etamaterials
 
 TODO: Add fancy image or gif
 
