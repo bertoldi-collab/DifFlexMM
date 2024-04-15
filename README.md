@@ -44,7 +44,7 @@ In particular, differentiability is provided with respect to:
 This repository contains all the code developed for the paper:
 TODO: Add paper link
 
-## Installation
+## ⬇️ Installation
 
 Assuming you have access to the repo and ssh keys are set up in your GitHub account, you can install the package with
 
@@ -58,7 +58,7 @@ or you can clone the repository, `cd` into the `DifFlexMM` folder, and install w
 pip install -e .
 ```
 
-## Contributing
+## 🤝 Contributing
 
 <details>
 <summary><b>Expand here</b></summary>
@@ -74,7 +74,7 @@ To get started:
 
 </details>
 
-## Citation
+## 📝 Citation
 
 If you use this code in your research, please cite the paper:
 
