@@ -48,7 +48,7 @@ SolutionType = Union[SolutionData, EigenmodeData]
 class GeometricalParams(NamedTuple):
     """Geometrical parameters of the system.
 
-    These parameters are typically computed from a given geometry class defined in `blockymetamaterials.geometry`.
+    These parameters are typically computed from a given geometry class defined in `difflexmm.geometry`.
 
     Attrs:
         block_centroids (jnp.ndarray): Centroid coordinates of the blocks.
@@ -62,7 +62,7 @@ class GeometricalParams(NamedTuple):
 class LigamentParams(NamedTuple):
     """Parameters for the bonds modeled as finite-length ligaments.
 
-    These are meant to be used with the ligament energy functions defined in `blockymetamaterials.energy`.
+    These are meant to be used with the ligament energy functions defined in `difflexmm.energy`.
 
     Attrs:
         k_stretch (jnp.ndarray): Either a scalar or an array of shape (n_bonds,) representing the stretch stiffness of each bond.
@@ -80,7 +80,7 @@ class LigamentParams(NamedTuple):
 class StretchingTorsionalSpringParams(NamedTuple):
     """Parameters for the bonds modeled as zero-length springs accounting for stretching and bending.
 
-    These are meant to be used with the `stretching_torsional_spring_energy` functions defined in `blockymetamaterials.energy`.
+    These are meant to be used with the `stretching_torsional_spring_energy` functions defined in `difflexmm.energy`.
 
     Attrs:
         k_stretch (jnp.ndarray): Either a scalar or an array of shape (n_bonds,) representing the stretch stiffness of each bond.
@@ -114,7 +114,7 @@ class ContactParams(NamedTuple):
 class MagneticParams(NamedTuple):
     """Magnetic parameters of the system.
 
-    These are meant to be used with the magnetic energy functions defined in `blockymetamaterials.energy`.
+    These are meant to be used with the magnetic energy functions defined in `difflexmm.energy`.
 
     Attrs:
         dipole_angles (jnp.ndarray): Array of shape (n_dipoles, 2) representing the initial (reference) angles (in_plane_angle, pitch) of each dipole.

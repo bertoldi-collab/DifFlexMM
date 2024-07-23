@@ -532,7 +532,7 @@ def plot_video_frame_field_overlaid(
 
 def main():
     parser = argparse.ArgumentParser(
-        prog="BlockyMetamaterials plotting script")
+        prog="DifFlexMM plotting script")
     parser.add_argument("-i", "--data-file",
                         help='Destination to pkl data file', required=True)
     parser.add_argument("-o", "--out", help="Output path.", required=True)
