@@ -371,6 +371,30 @@ class ForwardProblem:
     def to_data(self):
         return ForwardProblem(**dataclasses.asdict(self))
 
+    @staticmethod
+    def from_dict(dict_in):
+        # Convert solution data to named tuple
+        if dict_in["solution_data"] is not None:
+            if type(dict_in["solution_data"]) is dict:
+                dict_in["solution_data"] = SolutionData(
+                    **dict_in["solution_data"])
+            elif type(dict_in["solution_data"]) is list:
+                dict_in["solution_data"] = [SolutionData(
+                    **solution) for solution in dict_in["solution_data"]]
+        problem_data = ForwardProblem(**dict_in)
+        problem_data.is_setup = False
+        return problem_data
+
+    def to_dict(self):
+        # Make sure namedtuples are converted to dictionaries before saving
+        dict_out = dataclasses.asdict(self)
+        if type(dict_out["solution_data"]) is SolutionData:
+            dict_out["solution_data"] = dict_out["solution_data"]._asdict()
+        elif type(dict_out["solution_data"]) is list:
+            dict_out["solution_data"] = [solution._asdict()
+                                         for solution in dict_out["solution_data"]]
+        return dict_out
+
 
 @dataclass
 class OptimizationProblem:
@@ -638,3 +662,19 @@ class OptimizationProblem:
 
     def to_data(self):
         return OptimizationProblem(**dataclasses.asdict(self))
+
+    @staticmethod
+    def from_dict(dict_in):
+        # Convert solution data to named tuple
+        dict_in["forward_problem"] = ForwardProblem.from_dict(
+            dict_in["forward_problem"])
+        dict_in["forward_input"] = ForwardInput(**dict_in["forward_input"])
+        optimization_data = OptimizationProblem(**dict_in)
+        optimization_data.is_setup = False
+        return optimization_data
+
+    def to_dict(self):
+        # Make sure namedtuples are converted to dictionaries before saving
+        dict_out = dataclasses.asdict(self)
+        dict_out["forward_problem"] = self.forward_problem.to_dict()
+        return dict_out

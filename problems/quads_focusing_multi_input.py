@@ -254,3 +254,21 @@ class OptimizationProblem:
 
     def to_data(self):
         return OptimizationProblem(**dataclasses.asdict(self))
+
+    @staticmethod
+    def from_dict(dict_in):
+        # Convert solution data to named tuple
+        dict_in["forward_problems"] = [
+            ForwardProblem.from_dict(problem_data)
+            for problem_data in dict_in["forward_problems"]
+        ]
+        optimization_data = OptimizationProblem(**dict_in)
+        optimization_data.is_setup = False
+        return optimization_data
+
+    def to_dict(self):
+        # Make sure namedtuples are converted to dictionaries before saving
+        dict_out = dataclasses.asdict(self)
+        dict_out["forward_problems"] = [problem.to_dict()
+                                        for problem in self.forward_problems]
+        return dict_out
