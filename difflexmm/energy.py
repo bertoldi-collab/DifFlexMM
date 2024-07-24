@@ -598,6 +598,16 @@ def build_magnetic_energy(magnetic_block_ids: jnp.ndarray, mu0=1.):
     return magnetic_energy_fn
 
 
+def angular_momentum(block_position, block_velocity, inertia, reference_point=jnp.array([0., 0.])):
+    """
+    Computes the angular momentum of the blocks.
+    """
+    momentum_centroids = jnp.cross(block_position[:, :2] - reference_point,
+                                   block_velocity[:, :2] * inertia[:, :2], axis=-1)
+    momentum_rotations = block_velocity[:, 2] * inertia[:, 2]
+    return momentum_centroids + momentum_rotations
+
+
 def compute_ligament_strains(block_displacement, centroid_node_vectors, bond_connectivity, reference_bond_vectors):
     node_displacements = block_to_node_kinematics(
         block_displacement,
