@@ -29,7 +29,6 @@ def vdot(v1, v2):
 
 def simple_spring_energy(nodal_DOFs: Tuple[jnp.ndarray, jnp.ndarray], reference_vector: jnp.ndarray = jnp.array([1., 0.]), k_stretch=1.):
     """Computes the energy of a simple linear spring connecting two nodes.
-    # TODO: Test this!
 
     Args:
         nodal_DOFs (Tuple[ndarray, ndarray]): tuple of arrays of shape (Any, 3) representing the DOFs of the nodes connected by the ligament.
