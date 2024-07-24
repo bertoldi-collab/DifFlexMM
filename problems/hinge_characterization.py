@@ -9,7 +9,7 @@ import nlopt
 
 from difflexmm.dynamics import setup_dynamic_solver
 from difflexmm.energy import build_contact_energy, build_strain_energy, combine_block_energies, ligament_energy, ligament_energy_linearized
-from difflexmm.geometry import RotatedSquareGeometry
+from difflexmm.geometry import QuadGeometry, RotatedSquareGeometry
 from difflexmm.utils import ContactParams, ControlParams, GeometricalParams, LigamentParams, MechanicalParams, SolutionData, SolutionType
 import jax.numpy as jnp
 
@@ -79,6 +79,272 @@ class ForwardProblem:
         block_centroids, centroid_node_vectors, bond_connectivity, reference_bond_vectors = geometry.get_parametrization()
         _block_centroids = block_centroids(self.initial_angle)
         _centroid_node_vectors = centroid_node_vectors(self.initial_angle)
+        _bond_connectivity = bond_connectivity()
+        _reference_bond_vectors = reference_bond_vectors()
+
+        # Damping
+        damped_blocks = jnp.arange(geometry.n_blocks)
+        k_ref = self.k_stretch
+        mass_ref = self.density*geometry.spacing**2
+        damping_ref = jnp.array([
+            (k_ref * mass_ref)**0.5,
+            (k_ref * mass_ref)**0.5,
+            (k_ref * mass_ref)**0.5 * geometry.spacing**2
+        ]) * jnp.ones((geometry.n_blocks, 3))
+        damping_values = self.damping * damping_ref
+
+        # Applied displacements
+        constrained_blocks = jnp.concatenate([
+            jnp.arange(geometry.n_blocks-geometry.n1_blocks,
+                       geometry.n_blocks),  # top row
+            jnp.arange(geometry.n1_blocks)  # bottom row
+        ])
+        constrained_block_DOF_pairs = jnp.array([
+            jnp.concatenate(
+                [constrained_blocks, constrained_blocks, constrained_blocks]),
+            jnp.concatenate([
+                0*jnp.ones(constrained_blocks.shape, dtype=jnp.int32),
+                1*jnp.ones(constrained_blocks.shape, dtype=jnp.int32),
+                2*jnp.ones(constrained_blocks.shape, dtype=jnp.int32)
+            ])
+        ]).T
+        if self.loading_type == "tension":
+            loading_vector = jnp.zeros((len(constrained_block_DOF_pairs),))
+            top_row = jnp.where(constrained_block_DOF_pairs[:, 1] == 1)[
+                0][:geometry.n1_blocks]  # top positions
+            loading_vector = loading_vector.at[top_row].set(1.)
+        elif self.loading_type == "compression":
+            loading_vector = jnp.zeros((len(constrained_block_DOF_pairs),))
+            top_row = jnp.where(constrained_block_DOF_pairs[:, 1] == 1)[
+                0][:geometry.n1_blocks]  # top positions
+            loading_vector = loading_vector.at[top_row].set(-1.)
+        elif self.loading_type == "shear":
+            loading_vector = jnp.zeros((len(constrained_block_DOF_pairs),))
+            top_row = jnp.where(constrained_block_DOF_pairs[:, 1] == 0)[
+                0][:geometry.n1_blocks]  # top positions
+            loading_vector = loading_vector.at[top_row].set(1.)
+        else:
+            raise ValueError(
+                "Loading type should be either tension, compression, or shear!"
+            )
+        # Reaction DOFs to compute reaction forces
+        reaction_block_DOF_pairs = constrained_block_DOF_pairs[top_row]
+
+        # Applied displacement
+        def applied_displacement(t, amplitude, loading_rate):
+            return amplitude * jnp.where(t < loading_rate**-1, t * loading_rate, 1.)
+
+        def constrained_DOFs_fn(t, amplitude, loading_rate):
+            # Ramp up to target displacement
+            return loading_vector * applied_displacement(t, amplitude, loading_rate)
+
+        # Construct strain energy
+        strain_energy = build_strain_energy(
+            bond_connectivity=_bond_connectivity,
+            bond_energy_fn=ligament_energy_linearized if self.linearized_strains else ligament_energy,
+        )
+        contact_energy = build_contact_energy(
+            bond_connectivity=_bond_connectivity)
+        potential_energy = combine_block_energies(
+            strain_energy, contact_energy) if self.use_contact else strain_energy
+
+        # Setup solver
+        solve_dynamics = setup_dynamic_solver(
+            geometry=geometry,
+            energy_fn=potential_energy,
+            constrained_block_DOF_pairs=constrained_block_DOF_pairs,
+            constrained_DOFs_fn=constrained_DOFs_fn,
+            damped_blocks=damped_blocks,
+            atol=self.atol,
+            rtol=self.rtol,
+        )
+
+        # Analysis params
+        simulation_time = self.loading_rate**-1
+        timepoints = jnp.linspace(0, simulation_time, self.n_timepoints)
+
+        # Initial conditions
+        state0 = jnp.zeros((2, geometry.n_blocks, 3))
+
+        # Setup forward
+        def forward(k_values: Tuple[float, float, float]) -> Tuple[SolutionData, ControlParams]:
+
+            # Design variables
+            k_stretch, k_shear, k_rot = k_values
+
+            # Define control params
+            control_params = ControlParams(
+                geometrical_params=GeometricalParams(
+                    block_centroids=_block_centroids,
+                    centroid_node_vectors=_centroid_node_vectors,
+                ),
+                mechanical_params=MechanicalParams(
+                    bond_params=LigamentParams(
+                        k_stretch=k_stretch,
+                        k_shear=k_shear,
+                        k_rot=k_rot,
+                        reference_vector=_reference_bond_vectors,
+                    ),
+                    density=self.density,
+                    damping=damping_values,
+                    contact_params=ContactParams(
+                        k_contact=self.k_contact,
+                        min_angle=self.min_angle,
+                        cutoff_angle=self.cutoff_angle,
+                    ),
+                ),
+                constraint_params=dict(
+                    amplitude=self.amplitude,
+                    loading_rate=self.loading_rate,
+                ),
+            )
+
+            # Solve dynamics
+            solution = solve_dynamics(
+                state0=state0,
+                timepoints=timepoints,
+                control_params=control_params,
+            )
+
+            return SolutionData(
+                block_centroids=_block_centroids,
+                centroid_node_vectors=_centroid_node_vectors,
+                bond_connectivity=_bond_connectivity,
+                timepoints=timepoints,
+                fields=solution
+            ), control_params
+
+        self.solve = jit(forward)
+        self.geometry = geometry
+        self.potential_energy = potential_energy
+        self.elastic_forces = grad(potential_energy)
+        self.applied_displacement = applied_displacement
+        self.reaction_block_DOF_pairs = reaction_block_DOF_pairs
+        self.is_setup = True
+
+    def force_displacement(self, solution_data: SolutionData, control_params: ControlParams):
+        """
+        Compute force-displacement data for the given solution data and control params.
+        """
+        if self.is_setup:
+            displacement_history = solution_data.fields[:, 0]
+            block_DOF_pairs = self.reaction_block_DOF_pairs
+            force_history = vmap(
+                lambda u: jnp.sum(
+                    self.elastic_forces(u, control_params)[
+                        block_DOF_pairs[:, 0],
+                        block_DOF_pairs[:, 1],
+                    ]
+                )
+            )(displacement_history)
+            applied_u = self.applied_displacement(
+                solution_data.timepoints,
+                **control_params.constraint_params,
+            )
+            return jnp.array([applied_u, force_history*self.force_multiplier])
+
+    @staticmethod
+    def from_data(problem_data):
+        problem_data = ForwardProblem(**problem_data)
+        problem_data.is_setup = False
+        return problem_data
+
+    def to_data(self):
+        return ForwardProblem(**dataclasses.asdict(self))
+
+    @staticmethod
+    def from_dict(dict_in):
+        # Convert solution data to named tuple
+        if dict_in["solution_data"] is not None:
+            if type(dict_in["solution_data"]) is dict:
+                dict_in["solution_data"] = SolutionData(
+                    **dict_in["solution_data"])
+            elif type(dict_in["solution_data"]) is list:
+                dict_in["solution_data"] = [SolutionData(
+                    **solution) for solution in dict_in["solution_data"]]
+        problem_data = ForwardProblem(**dict_in)
+        problem_data.is_setup = False
+        return problem_data
+
+    def to_dict(self):
+        # Make sure namedtuples are converted to dictionaries before saving
+        dict_out = dataclasses.asdict(self)
+        if type(dict_out["solution_data"]) is SolutionData:
+            dict_out["solution_data"] = dict_out["solution_data"]._asdict()
+        elif type(dict_out["solution_data"]) is list:
+            dict_out["solution_data"] = [solution._asdict()
+                                         for solution in dict_out["solution_data"]]
+        return dict_out
+
+
+@dataclass
+class ForwardProblemQuads:
+    """
+    Forward problem for validation of hinge model using a static test on a random quad sample.
+    The forward perform either a tension, compression, or shear test on the sample in displacement control with clamped top and bottom rows.
+    """
+
+    # QuadGeometry
+    n1_blocks: int
+    n2_blocks: int
+    spacing: Any
+    bond_length: Any
+    horizontal_shifts: Any
+    vertical_shifts: Any
+
+    # Mechanical
+    k_stretch: Any
+    k_shear: Any
+    k_rot: Any
+    density: Any
+    damping: Any
+
+    # Loading
+    loading_type: Literal["tension", "compression", "shear"]
+    amplitude: Any
+    loading_rate: Any
+
+    # Analysis
+    n_timepoints: int
+    linearized_strains: bool = False
+
+    # Force multiplier (1 or -1 used to compare with experiments according to assumed sign convention)
+    force_multiplier: float = 1.
+
+    # Contact
+    use_contact: bool = True
+    k_contact: Any = 1.
+    min_angle: Any = 0.*jnp.pi/180
+    cutoff_angle: Any = 5.*jnp.pi/180
+
+    # Solution or list of solutions
+    solution_data: Optional[Union[SolutionType, List[SolutionType]]] = None
+
+    # Solver tolerance
+    atol: float = 1e-8
+    rtol: float = 1e-8
+
+    # Problem name
+    name: str = "hinge_characterization"
+
+    # Flag indicating that solve method is not available. It needs to be set up by calling self.setup().
+    is_setup: bool = False
+
+    def setup(self) -> None:
+        """
+        Set up forward solver.
+        """
+
+        # Geometry
+        geometry = QuadGeometry(n1_blocks=self.n1_blocks,
+                                n2_blocks=self.n2_blocks,
+                                spacing=self.spacing,
+                                bond_length=self.bond_length)
+        block_centroids, centroid_node_vectors, bond_connectivity, reference_bond_vectors = geometry.get_parametrization()
+        _block_centroids = block_centroids(
+            self.horizontal_shifts, self.vertical_shifts)
+        _centroid_node_vectors = centroid_node_vectors(
+            self.horizontal_shifts, self.vertical_shifts)
         _bond_connectivity = bond_connectivity()
         _reference_bond_vectors = reference_bond_vectors()
 
