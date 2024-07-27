@@ -33,7 +33,8 @@ def _block_to_node_displacement(block_displacement: jnp.ndarray, centroid_node_v
 
 # Vectorize over array of nodes per block first and then over array of blocks
 block_to_node_kinematics = vmap(
-    vmap(_block_to_node_displacement, in_axes=(None, 0)), in_axes=(0, 0))
+    vmap(_block_to_node_displacement, in_axes=(None, 0)), in_axes=(0, 0)
+)
 
 
 def build_constrained_kinematics(geometry: Geometry, constrained_block_DOF_pairs: jnp.ndarray, constrained_DOFs_fn: Callable = lambda t, **kwargs: 0):
