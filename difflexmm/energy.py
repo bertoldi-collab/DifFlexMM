@@ -502,7 +502,17 @@ def kinetic_energy(block_velocity, inertia):
 def angular_momentum(block_position, block_velocity, inertia, reference_point=jnp.array([0., 0.])):
     """
     Computes the angular momentum of the blocks.
+
+    Args:
+        block_position (ndarray): array of shape (n_blocks, 2) representing the position of the blocks.
+        block_velocity (ndarray): array of shape (n_blocks, 3) representing the velocity of the blocks.
+        inertia (ndarray): array of shape (n_blocks, 3) representing the inertia of the blocks.
+        reference_point (ndarray, optional): array of shape (2,) representing the reference point for computing the angular momentum. Defaults to jnp.array([0., 0.]).
+
+    Returns:
+        ndarray: array of shape (n_blocks,) representing the angular momentum of the blocks.
     """
+
     momentum_centroids = jnp.cross(block_position[:, :2] - reference_point,
                                    block_velocity[:, :2] * inertia[:, :2], axis=-1)
     momentum_rotations = block_velocity[:, 2] * inertia[:, 2]
