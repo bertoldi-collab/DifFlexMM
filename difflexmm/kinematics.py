@@ -78,25 +78,3 @@ def build_constrained_kinematics(geometry: Geometry, constrained_block_DOF_pairs
         return all_DOFs.reshape((geometry.n_blocks, 3))
 
     return constrained_kinematics
-
-
-def block_to_dipole_configuration(block_displacements: jnp.ndarray, block_centroids: jnp.ndarray, dipole_angles: jnp.ndarray, magnetic_block_ids: jnp.ndarray):
-    """Computes configuration of the dipoles from the displacements of the blocks.
-
-    Args:
-        block_displacements (ndarray): array of shape (n_blocks, 3) representing the in-plane displacement of the block's centroid (first two positions) and the block's rotation (last position).
-        block_centroids (ndarray): array of shape (n_blocks, 2) representing the centroid of the blocks in the reference configuration.
-        dipole_angles (ndarray): array of shape (n_dipoles, 2) representing the reference in-plane and pitch angle of the dipoles.
-        magnetic_block_ids (ndarray): array of shape (n_dipoles,) representing the block ids of the blocks holding magnets.
-
-    Returns:
-        ndarray: array of shape (n_dipoles, 4) representing the current configuration of the dipoles.
-    """
-
-    dipole_locations = block_centroids[magnetic_block_ids] + \
-        block_displacements[magnetic_block_ids, :2]
-    current_dipole_inplane_angles = block_displacements[magnetic_block_ids, 2] + \
-        dipole_angles[:, 0]  # in-plane angle of the dipole
-    # out-of-plane angle of the dipole (pitch)
-    current_dipole_outofplane_angles = dipole_angles[:, 1]
-    return jnp.column_stack((dipole_locations, current_dipole_inplane_angles, current_dipole_outofplane_angles))
