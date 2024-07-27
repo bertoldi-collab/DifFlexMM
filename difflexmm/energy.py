@@ -530,4 +530,5 @@ def compute_ligament_strains(block_displacement, centroid_node_vectors, bond_con
 
 
 compute_ligament_strains_history = vmap(
-    compute_ligament_strains, in_axes=(0, None, None, None))
+    compute_ligament_strains, in_axes=(0, None, None, None)
+)
