@@ -249,6 +249,7 @@ def point_to_edge_distance(point: jnp.ndarray, edge: jnp.ndarray):
     return x_distance_to_e
 
 
+# Contact model based edge-to-edge distances
 def edges_distance(edge_1: jnp.ndarray, edge_2: jnp.ndarray):
     """Computes the distance between two edges.
 
