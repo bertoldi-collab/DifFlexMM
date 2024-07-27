@@ -9,7 +9,7 @@ from jax import vmap
 from jax_md import smap
 
 from difflexmm.geometry import compute_edge_angles, rotation_matrix
-from difflexmm.kinematics import block_to_node_kinematics, block_to_dipole_configuration
+from difflexmm.kinematics import block_to_node_kinematics
 from difflexmm.utils import ControlParams
 
 
