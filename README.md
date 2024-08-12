@@ -49,6 +49,21 @@ Arbitrary forward problems can be defined by chaining this simulator function wi
 This repository contains all the code developed for the paper:
 [G. Bordiga, E. Medina, S. Jafarzadeh, C. Boesch, R. P. Adams, V. Tournat, K. Bertoldi. Automated discovery of reprogrammable nonlinear dynamic metamaterials. _Under review_. (2024).](https://arxiv.org/abs/2403.08078)
 
+## 🎯 Solved design problems
+
+The framework has been used to design a variety of mechanical metamaterials with different functionalities.
+
+|  | Task/tasks description | Notebooks | Data* |
+| --- | --- | --- | --- |
+| 🌟 | Focusing energy at a single target location | [Quads](notebooks/quads_focusing_3dp_pla_shims.ipynb), [Kagome](notebooks/kagome_focusing_3dp_pla_shims.ipynb) | [Quads](data/quads_focusing_3dp_pla_shims), [Kagome](data/kagome_focusing_3dp_pla_shims) |
+| ️🗡️ | Splitting energy between different target locations | [Quads](notebooks/quads_energy_splitting_3dp_pla_shims.ipynb) | [Quads](data/quads_energy_splitting_3dp_pla_shims) |
+| ✨ | Focusing multiple inputs at the same target location | [Quads](notebooks/quads_focusing_multi_input_3dp_pla_shims.ipynb) | [Quads](data/quads_focusing_multi_input_3dp_pla_shims) |
+| ️💫 | Reprogramming focusing target via static pre-compression | [Quads](notebooks/quads_focusing_switching_static_tuning_3dp_pla_shims.ipynb) | [Quads](data/quads_focusing_switching_static_tuning_3dp_pla_shims) |
+| 🌟🛡️ | Switching between focusing and protection task | [Quads](notebooks/quads_focusing_vs_protection_static_tuning_3dp_pla_shims.ipynb) | [Quads](data/quads_focusing_vs_protection_static_tuning_3dp_pla_shims) |
+| 🌀 | Nonlinear motion conversion | [Quads](notebooks/quads_spin_3dp_pla_shims.ipynb) | [Quads](data/quads_spin_3dp_pla_shims) |
+
+\* All data used for the paper can be downloaded from the associated Zenodo repository [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.12823471.svg)](https://doi.org/10.5281/zenodo.12823471).
+
 ## ⬇️ Installation
 
 Assuming you have access to the repo and ssh keys are set up in your GitHub account, you can install the package with
