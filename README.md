@@ -3,7 +3,7 @@
 ![Made with Python](https://img.shields.io/badge/Made%20with-Python-blue?logo=python&logoColor=ecf0f1&labelColor=34495e)
 [![Python tests](https://github.com/bertoldi-collab/DifFlexMM/actions/workflows/python_tests.yml/badge.svg)](https://github.com/bertoldi-collab/DifFlexMM/actions/workflows/python_tests.yml)
 [![arXiv](https://img.shields.io/badge/arXiv-2403.08078-b31b1b?logo=arXiv&logoColor=arXiv&labelColor=34495e)](https://arxiv.org/abs/2403.08078)
-[![DOI](https://img.shields.io/badge/Data-10.5281/zenodo.12823471-blue?logoColor=ecf0f1&labelColor=34495e)](https://doi.org/10.5281/zenodo.12823471)
+[![DOI](https://img.shields.io/badge/Data-10.5281/zenodo.12823471-blue?logo=zenodo&logoColor=ecf0f1&labelColor=34495e)](https://doi.org/10.5281/zenodo.12823471)
 
 **Dif**ferentiable **Flex**ible **M**echanical **M**etamaterials
 
@@ -63,7 +63,7 @@ The framework has been used to design a variety of mechanical metamaterials with
 | 🌟🛡️ | Switching between focusing and protection task | [Quads](notebooks/quads_focusing_vs_protection_static_tuning_3dp_pla_shims.ipynb) | [Quads](data/quads_focusing_vs_protection_static_tuning_3dp_pla_shims) | [Quads](https://github.com/bertoldi-collab/DifFlexMM/assets/16863374/ad4f9811-e623-4867-af42-c36ee31bcfbb) |
 | 🌀 | Nonlinear motion conversion | [Quads](notebooks/quads_spin_3dp_pla_shims.ipynb) | [Quads](data/quads_spin_3dp_pla_shims) | [Quads](https://github.com/bertoldi-collab/DifFlexMM/assets/16863374/9aa2bbc9-cbe0-4896-8c83-ce67f2c61af3) |
 
-\* All data generated or used for the paper can be downloaded from the associated Zenodo repository [![DOI](https://img.shields.io/badge/Data-10.5281/zenodo.12823471-blue?logoColor=ecf0f1&labelColor=34495e)](https://doi.org/10.5281/zenodo.12823471).
+\* All data generated or used for the paper can be downloaded from the associated Zenodo repository [![DOI](https://img.shields.io/badge/Data-10.5281/zenodo.12823471-blue?logo=zenodo&logoColor=ecf0f1&labelColor=34495e)](https://doi.org/10.5281/zenodo.12823471).
 
 ## ⬇️ Installation
 
