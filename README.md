@@ -64,6 +64,11 @@ The framework has been used to design a variety of mechanical metamaterials with
 | 🌀 | Nonlinear motion conversion | [Quads](notebooks/quads_spin_3dp_pla_shims.ipynb) | [Quads](data/quads_spin_3dp_pla_shims) | [Quads](https://github.com/bertoldi-collab/DifFlexMM/assets/16863374/9aa2bbc9-cbe0-4896-8c83-ce67f2c61af3) |
 
 \* All data generated or used for the paper can be downloaded from [![DOI](https://img.shields.io/badge/Data-10.5281/zenodo.12823471-blue?logo=zenodo&logoColor=ecf0f1&labelColor=34495e)](https://doi.org/10.5281/zenodo.12823471).
+To access and visualize the data:
+
+- Extract `data.zip` in the root directory of the repository.
+- Load and visualize optimization results for all the solved problems using the provided [notebooks](notebooks).
+- Load and visualize experimental data using the notebooks in the [exp](exp) folder.
 
 ## ⬇️ Installation
 
