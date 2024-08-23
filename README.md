@@ -72,7 +72,7 @@ To access and visualize the data:
 
 ## ⬇️ Installation
 
-### Intsalling DifFlexMM only
+### DifFlexMM only
 
 Assuming you have access to the repo and ssh keys are set up in your GitHub account, you can install the package with
 
@@ -80,7 +80,7 @@ Assuming you have access to the repo and ssh keys are set up in your GitHub acco
 pip install git+ssh://git@github.com/bertoldi-collab/DifFlexMM.git
 ```
 
-### Installing DifFlexMM with examples of solved design problems
+### DifFlexMM with examples of solved design problems
 
 Clone the repository, `cd` into the `DifFlexMM` folder, and install with
 
