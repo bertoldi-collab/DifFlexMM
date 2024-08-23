@@ -106,7 +106,7 @@ To get started:
 
 ## 📝 Citation
 
-If you use this code in your research, please cite the paper:
+If you use this code in your research or anywhere, please cite the paper:
 
 ```bibtex
 @article{bordiga_2024,
