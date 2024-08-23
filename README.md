@@ -72,13 +72,17 @@ To access and visualize the data:
 
 ## ⬇️ Installation
 
+### Intsalling DifFlexMM only
+
 Assuming you have access to the repo and ssh keys are set up in your GitHub account, you can install the package with
 
 ```bash
 pip install git+ssh://git@github.com/bertoldi-collab/DifFlexMM.git
 ```
 
-or you can clone the repository, `cd` into the `DifFlexMM` folder, and install with
+### Installing DifFlexMM with examples of solved design problems
+
+Clone the repository, `cd` into the `DifFlexMM` folder, and install with
 
 ```bash
 pip install -e .
@@ -93,8 +97,8 @@ The dependency management of the project is done via [poetry](https://python-poe
 
 To get started:
 
-- Install [poetry](https://python-poetry.org/docs/)
-- Clone the repo
+- Install [poetry](https://python-poetry.org/docs/).
+- Clone the repository.
 - `cd` into the root directory and run `poetry install`. This will create the poetry environment with all the necessary dependencies.
 - If you are using vscode, search for `venv path` in the settings and paste `~/.cache/pypoetry/virtualenvs` in the `venv path` field. Then select the poetry enviroment as python enviroment for the project.
 
