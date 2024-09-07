@@ -4,6 +4,8 @@
 [![Python tests](https://github.com/bertoldi-collab/DifFlexMM/actions/workflows/python_tests.yml/badge.svg)](https://github.com/bertoldi-collab/DifFlexMM/actions/workflows/python_tests.yml)
 [![arXiv](https://img.shields.io/badge/arXiv-2403.08078-b31b1b?logo=arXiv&logoColor=arXiv&labelColor=34495e)](https://arxiv.org/abs/2403.08078)
 [![DOI](https://img.shields.io/badge/Data-10.5281/zenodo.12823471-blue?logo=zenodo&logoColor=ecf0f1&labelColor=34495e)](https://doi.org/10.5281/zenodo.12823471)
+[![](https://img.shields.io/badge/Paper-10.1038/s41563--024--02008--6-blue?logoColor=ecf0f1&labelColor=34495e)](https://doi.org/10.1038/s41563-024-02008-6)
+
 
 **Dif**ferentiable **Flex**ible **M**echanical **M**etamaterials
 
@@ -48,7 +50,8 @@ Arbitrary forward problems can be defined by chaining this simulator function wi
 ## 📜 Paper
 
 This repository contains all the code developed for the paper:
-[G. Bordiga, E. Medina, S. Jafarzadeh, C. Boesch, R. P. Adams, V. Tournat, K. Bertoldi. Automated discovery of reprogrammable nonlinear dynamic metamaterials. _Under review_. (2024).](https://arxiv.org/abs/2403.08078)
+
+[G. Bordiga, E. Medina, S. Jafarzadeh, C. Boesch, R. P. Adams, V. Tournat, K. Bertoldi. Automated discovery of reprogrammable nonlinear dynamic metamaterials. _Nature Materials_. (2024).](https://doi.org/10.1038/s41563-024-02008-6)
 
 ## 🎯 Solved design problems
 
