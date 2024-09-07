@@ -2,9 +2,9 @@
 
 ![Made with Python](https://img.shields.io/badge/Made%20with-Python-blue?logo=python&logoColor=ecf0f1&labelColor=34495e)
 [![Python tests](https://github.com/bertoldi-collab/DifFlexMM/actions/workflows/python_tests.yml/badge.svg)](https://github.com/bertoldi-collab/DifFlexMM/actions/workflows/python_tests.yml)
-[![arXiv](https://img.shields.io/badge/arXiv-2403.08078-b31b1b?logo=arXiv&logoColor=arXiv&labelColor=34495e)](https://arxiv.org/abs/2403.08078)
-[![DOI](https://img.shields.io/badge/Data-10.5281/zenodo.12823471-blue?logo=zenodo&logoColor=ecf0f1&labelColor=34495e)](https://doi.org/10.5281/zenodo.12823471)
 [![](https://img.shields.io/badge/Paper-10.1038/s41563--024--02008--6-blue?logoColor=ecf0f1&labelColor=34495e)](https://doi.org/10.1038/s41563-024-02008-6)
+[![DOI](https://img.shields.io/badge/Data-10.5281/zenodo.12823471-blue?logo=zenodo&logoColor=ecf0f1&labelColor=34495e)](https://doi.org/10.5281/zenodo.12823471)
+[![arXiv](https://img.shields.io/badge/arXiv-2403.08078-b31b1b?logo=arXiv&logoColor=arXiv&labelColor=34495e)](https://arxiv.org/abs/2403.08078)
 
 
 **Dif**ferentiable **Flex**ible **M**echanical **M**etamaterials
