@@ -2,7 +2,7 @@
 
 ![Made with Python](https://img.shields.io/badge/Made%20with-Python-blue?logo=python&logoColor=ecf0f1&labelColor=34495e)
 [![Python tests](https://github.com/bertoldi-collab/DifFlexMM/actions/workflows/python_tests.yml/badge.svg)](https://github.com/bertoldi-collab/DifFlexMM/actions/workflows/python_tests.yml)
-[![](https://img.shields.io/badge/Paper-10.1038/s41563--024--02008--6-blue?logoColor=ecf0f1&labelColor=34495e)](https://doi.org/10.1038/s41563-024-02008-6)
+[![Paper](https://img.shields.io/badge/Paper-10.1038/s41563--024--02008--6-blue?logoColor=ecf0f1&labelColor=34495e)](https://doi.org/10.1038/s41563-024-02008-6)
 [![DOI](https://img.shields.io/badge/Data-10.5281/zenodo.12823471-blue?logo=zenodo&logoColor=ecf0f1&labelColor=34495e)](https://doi.org/10.5281/zenodo.12823471)
 [![arXiv](https://img.shields.io/badge/arXiv-2403.08078-b31b1b?logo=arXiv&logoColor=arXiv&labelColor=34495e)](https://arxiv.org/abs/2403.08078)
 
@@ -116,10 +116,10 @@ If you use this code in your research or anywhere, please cite the paper:
     title   =   {Automated discovery of reprogrammable nonlinear dynamic metamaterials},
     author  =   {Giovanni Bordiga and Eder Medina and Sina Jafarzadeh and Cyrill B\"osch and Ryan P. Adams and Vincent Tournat and Katia Bertoldi},
     year    =   {2024},
-    journal =   {TBD},
+    journal =   {Nature Materials},
     volume  =   {TBD},
     number  =   {TBD},
     pages   =   {TBD},
-    doi     =   {TBD},
+    doi     =   {10.1038/s41563-024-02008-6},
 }
 ```
