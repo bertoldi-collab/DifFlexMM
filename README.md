@@ -57,7 +57,7 @@ This repository contains all the code developed for the paper:
 
 The framework has been used to design a variety of mechanical metamaterials with different functionalities.
 
-|  | Task/tasks description | Notebooks | Data* | Video |
+|  | Task/tasks description | Notebooks | Data 💾 | Video |
 | --- | --- | --- | --- | --- |
 | 🌟 | Focusing energy at a single target location | [Quads](notebooks/quads_focusing_3dp_pla_shims.ipynb), [Kagome](notebooks/kagome_focusing_3dp_pla_shims.ipynb) | [Quads](data/quads_focusing_3dp_pla_shims), [Kagome](data/kagome_focusing_3dp_pla_shims) | [Quads](https://github.com/bertoldi-collab/DifFlexMM/assets/16863374/ff76f0bc-463d-49c4-83bb-278f301af246), [Kagome](https://github.com/bertoldi-collab/DifFlexMM/assets/16863374/537a6e32-c62d-4fdc-8a9d-e4762fda8a21) |
 | ️🗡️ | Splitting energy between different target locations | [Quads](notebooks/quads_energy_splitting_3dp_pla_shims.ipynb) | [Quads](data/quads_energy_splitting_3dp_pla_shims) | [Quads]()TODO |
@@ -66,7 +66,7 @@ The framework has been used to design a variety of mechanical metamaterials with
 | 🌟🛡️ | Switching between focusing and protection task | [Quads](notebooks/quads_focusing_vs_protection_static_tuning_3dp_pla_shims.ipynb) | [Quads](data/quads_focusing_vs_protection_static_tuning_3dp_pla_shims) | [Quads](https://github.com/bertoldi-collab/DifFlexMM/assets/16863374/ad4f9811-e623-4867-af42-c36ee31bcfbb) |
 | 🌀 | Nonlinear motion conversion | [Quads](notebooks/quads_spin_3dp_pla_shims.ipynb) | [Quads](data/quads_spin_3dp_pla_shims) | [Quads](https://github.com/bertoldi-collab/DifFlexMM/assets/16863374/9aa2bbc9-cbe0-4896-8c83-ce67f2c61af3) |
 
-\* All data generated or used for the paper can be downloaded from [![DOI](https://img.shields.io/badge/Data-10.5281/zenodo.12823471-blue?logo=zenodo&logoColor=ecf0f1&labelColor=34495e)](https://doi.org/10.5281/zenodo.12823471).
+💾 All data generated or used for the paper can be downloaded from [![DOI](https://img.shields.io/badge/Data-10.5281/zenodo.12823471-blue?logo=zenodo&logoColor=ecf0f1&labelColor=34495e)](https://doi.org/10.5281/zenodo.12823471).
 To access and visualize the data:
 
 - Extract `data.zip` in the root directory of the repository.
