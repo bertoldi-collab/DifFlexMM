@@ -1,6 +1,8 @@
 # Videos
 
-SI movies for the paper: [G. Bordiga, E. Medina, S. Jafarzadeh, C. Boesch, R. P. Adams, V. Tournat, K. Bertoldi. Automated discovery of reprogrammable nonlinear dynamic metamaterials. _Under review_. (2024).](https://arxiv.org/abs/2403.08078)
+SI movies for the paper:
+
+[G. Bordiga, E. Medina, S. Jafarzadeh, C. Boesch, R. P. Adams, V. Tournat, K. Bertoldi. Automated discovery of reprogrammable nonlinear dynamic metamaterials. _Nature Materials_. (2024).](https://doi.org/10.1038/s41563-024-02008-6)
 
 https://github.com/bertoldi-collab/DifFlexMM/assets/16863374/ff76f0bc-463d-49c4-83bb-278f301af246
 
