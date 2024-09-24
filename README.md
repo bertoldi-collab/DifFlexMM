@@ -9,7 +9,7 @@
 
 **Dif**ferentiable **Flex**ible **M**echanical **M**etamaterials
 
-TODO: Add fancy image or gif
+https://github.com/user-attachments/assets/8e966e96-13d4-439b-a0cb-d7dff115e7e1
 
 ## 🌅 Why DifFlexMM?
 
