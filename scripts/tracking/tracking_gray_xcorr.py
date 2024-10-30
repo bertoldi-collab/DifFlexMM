@@ -18,28 +18,29 @@ from scripts.tracking.utils import (collect_as, compute_block_displacement_from_
                                     sort_contours, max_angle_change_default, conv_size_default, step_size_default, adaptive_thresholding_block_default, aspect_ratio_threshold_default, search_window_size_default, marker_template_size_default, upscaling_factor_default)
 
 
-def preprocessing(img, blur_size, threshold, adaptive_thresholding=False, adaptive_thresholding_block=adaptive_thresholding_block_default, morphological_transformation=morphological_transformation_default):
+def preprocessing(img, blur_size, threshold, adaptive_thresholding=False, adaptive_thresholding_block=adaptive_thresholding_block_default, morphological_transformation=morphological_transformation_default, inverted_gray=False):
 
     median = cv2.medianBlur(img, blur_size)
+    thresh_id = cv2.THRESH_BINARY if inverted_gray else cv2.THRESH_BINARY_INV
     if adaptive_thresholding:
         thresh = cv2.adaptiveThreshold(median, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
-                                       cv2.THRESH_BINARY_INV, adaptive_thresholding_block, threshold)
+                                       thresh_id, adaptive_thresholding_block, threshold)
     else:
-        _, thresh = cv2.threshold(median, threshold, 255, cv2.THRESH_BINARY_INV)
+        _, thresh = cv2.threshold(median, threshold, 255, thresh_id)
 
     transformed = morphological_transformation(thresh)
 
     return transformed
 
 
-def get_contours(img, ROI_XY, blur_size, threshold, block_area, adaptive_thresholding=False, adaptive_thresholding_block=adaptive_thresholding_block_default, morphological_transformation=morphological_transformation_default):
+def get_contours(img, ROI_XY, blur_size, threshold, block_area, adaptive_thresholding=False, adaptive_thresholding_block=adaptive_thresholding_block_default, morphological_transformation=morphological_transformation_default, inverted_gray=False):
 
     img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 
     img_ROI = img[ROI_XY[1][0]: ROI_XY[1][1], ROI_XY[0][0]: ROI_XY[0][1]]
 
     thresh = preprocessing(img_ROI, blur_size, threshold, adaptive_thresholding=adaptive_thresholding,
-                           adaptive_thresholding_block=adaptive_thresholding_block, morphological_transformation=morphological_transformation)
+                           adaptive_thresholding_block=adaptive_thresholding_block, morphological_transformation=morphological_transformation, inverted_gray=inverted_gray)
 
     cnts, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
     # cnts, _ = cv2.findContours(thresh.astype(np.int32), cv2.RETR_FLOODFILL, cv2.CHAIN_APPROX_NONE)
@@ -70,6 +71,7 @@ def mark_reference_frame(
         morphological_transformation=morphological_transformation_default,
         markers_scaled_position=1.,
         frame=0,
+        inverted_gray=False,
         masked_areas=[],
         show=False,):
     """Place markers based on the reference geometry if provided.
@@ -90,6 +92,7 @@ def mark_reference_frame(
         morphological_transformation (function): Morphological transformation to be applied to the thresholded image. Default is cv2.morphologyEx(thresh, cv2.MORPH_OPEN, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3)), iterations=2).
         markers_scaled_position (float): Scaling factor for the marker positions. Default is 1.
         frame (int): Frame to be shown. Default is 0.
+        inverted_gray (bool): Whether the image is inverted. Default is False (i.e. tracking black objects).
         masked_areas (list): List of masked areas. Default is []. Each area is defines as ((x0, x1), (y0, y1)
         show (bool): Whether to show the image. Default is False.
 
@@ -110,7 +113,7 @@ def mark_reference_frame(
         image[ROI_XY[1][0]: ROI_XY[1][1], ROI_XY[0][0]: ROI_XY[0][1]][masked_area[1][0]: masked_area[1][1], masked_area[0][0]: masked_area[0][1]] = 255
     # Get contours
     cnts = get_contours(image, ROI_XY, blur_size, threshold, block_area,
-                        adaptive_thresholding=adaptive_thresholding, adaptive_thresholding_block=adaptive_thresholding_block, morphological_transformation=morphological_transformation)
+                        adaptive_thresholding=adaptive_thresholding, adaptive_thresholding_block=adaptive_thresholding_block, morphological_transformation=morphological_transformation, inverted_gray=inverted_gray)
     # Sort contours based on the reference geometry if provided.
     if reference_centroids is not None:
         cnts = sort_contours(cnts, reference_centroids, calib_xy)
@@ -166,6 +169,7 @@ def tracking(
         adaptive_thresholding_block=adaptive_thresholding_block_default,
         aspect_ratio_threshold=aspect_ratio_threshold_default,
         morphological_transformation=morphological_transformation_default,
+        inverted_gray=False,
         # Parameters for cross-correlation
         search_window_size=search_window_size_default,
         marker_template_size=marker_template_size_default,
@@ -199,6 +203,7 @@ def tracking(
         adaptive_thresholding_block (int): Block size for adaptive thresholding. Default is 11.
         aspect_ratio_threshold (float): Threshold for aspect ratio selecting the fitting method for contours (Below threshold minAreaRect is used, above fitEllipse). Default is 0.3.
         morphological_transformation (function): Morphological transformation to be applied to the thresholded image. Default is cv2.morphologyEx(thresh, cv2.MORPH_OPEN, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3)), iterations=2).
+        inverted_gray (bool): Whether the image is inverted. Default is False (i.e. tracking black objects).
         search_window_size (int): Size of the search window for cross-correlation. Default is 40px.
         marker_template_size (int): Size of the marker template for cross-correlation. Default is 20px.
         upscaling_factor (int): Upscaling factor for cross-correlation. Default is 5.
@@ -237,6 +242,7 @@ def tracking(
         morphological_transformation=morphological_transformation,
         markers_scaled_position=markers_scaled_position,
         frame=startVideo,
+        inverted_gray=inverted_gray,
         masked_areas=masked_areas,
         show=False,
     )
