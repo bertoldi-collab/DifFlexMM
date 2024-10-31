@@ -114,13 +114,14 @@ If you use this code in your research or anywhere, please cite the paper:
 
 ```bibtex
 @article{bordiga_2024,
-    title   =   {Automated discovery of reprogrammable nonlinear dynamic metamaterials},
-    author  =   {Giovanni Bordiga and Eder Medina and Sina Jafarzadeh and Cyrill B\"osch and Ryan P. Adams and Vincent Tournat and Katia Bertoldi},
-    year    =   {2024},
-    journal =   {Nature Materials},
-    volume  =   {TBD},
-    number  =   {TBD},
-    pages   =   {TBD},
-    doi     =   {10.1038/s41563-024-02008-6},
+    title   = {Automated Discovery of Reprogrammable Nonlinear Dynamic Metamaterials},
+    author  = {Bordiga, Giovanni and Medina, Eder and Jafarzadeh, Sina and B{\"o}sch, Cyrill and Adams, Ryan P. and Tournat, Vincent and Bertoldi, Katia},
+    year    = {2024},
+    journal = {Nature Materials},
+    volume  = {23},
+    number  = {11},
+    pages   = {1486--1494},
+    issn    = {1476-4660},
+    doi     = {10.1038/s41563-024-02008-6},
 }
 ```
