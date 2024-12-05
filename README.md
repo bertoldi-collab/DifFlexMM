@@ -52,7 +52,7 @@ Arbitrary forward problems can be defined by chaining this simulator function wi
 
 This repository contains all the code developed for the paper:
 
-[G. Bordiga, E. Medina, S. Jafarzadeh, C. Boesch, R. P. Adams, V. Tournat, K. Bertoldi. Automated discovery of reprogrammable nonlinear dynamic metamaterials. _Nature Materials_. (2024).](https://doi.org/10.1038/s41563-024-02008-6)
+> [G. Bordiga, E. Medina, S. Jafarzadeh, C. Boesch, R. P. Adams, V. Tournat, K. Bertoldi. Automated discovery of reprogrammable nonlinear dynamic metamaterials. _Nature Materials_. (2024).](https://doi.org/10.1038/s41563-024-02008-6)
 
 ## 🎯 Solved design problems
 
