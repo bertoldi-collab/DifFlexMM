@@ -6,7 +6,7 @@
 [![DOI](https://img.shields.io/badge/Data-10.5281/zenodo.12823471-blue?logo=zenodo&logoColor=ecf0f1&labelColor=34495e)](https://doi.org/10.5281/zenodo.12823471)
 [![arXiv](https://img.shields.io/badge/arXiv-2403.08078-b31b1b?logo=arXiv&logoColor=arXiv&labelColor=34495e)](https://arxiv.org/abs/2403.08078)
 [![GitHub license](https://img.shields.io/github/license/bertoldi-collab/DifFlexMM?labelColor=34495e)](https://github.com/bertoldi-collab/DifFlexMM/blob/main/LICENSE)
-![Badge](https://hitscounter.dev/api/hit?url=https%3A%2F%2Fgithub.com%2FGiovanniBordiga%2FDifFlexMM&label=Visits&icon=heart-fill&color=%232ecc71&message=&style=flat&tz=UTC)
+![Badge](https://hitscounter.dev/api/hit?url=https%3A%2F%2Fgithub.com%2Fbertoldi-collab%2FDifFlexMM&label=Visits&icon=heart-fill&color=%232ecc71&message=&style=flat&tz=UTC)
 
 **Dif**ferentiable **Flex**ible **M**echanical **M**etamaterials
 
