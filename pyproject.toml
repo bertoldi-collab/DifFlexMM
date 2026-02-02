@@ -18,9 +18,9 @@ keywords = [
 
 [tool.poetry.dependencies]
 python        = "^3.11"
-jax           = "^0.5"
-jaxlib        = "^0.5"
-jax-md        = "^0.2.26"
+jax           = "^0.5.3"
+jaxlib        = "^0.5.3"
+jax-md        = "^0.2.27"
 numpy         = ">=1.21,<2"
 nlopt         = "^2.7.1"
 opencv-python = "^4.5.5"
