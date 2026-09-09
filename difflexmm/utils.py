@@ -180,6 +180,22 @@ def save_data(path_or_filename: Union[str, Path], data: object):
         print("Data saved at " + str(path))
 
 
+# The package was renamed from `blockymetamaterials` to `difflexmm` after some of
+# the published data was generated, so those pickles name modules that no longer
+# exist. The data on Zenodo is immutable, so the rename is resolved on read.
+_LEGACY_MODULE_ALIASES = {"blockymetamaterials": "difflexmm"}
+
+
+class _LegacyUnpickler(pickle.Unpickler):
+    """Unpickler that maps pre-rename module paths onto their current names."""
+
+    def find_class(self, module: str, name: str):
+        root, dot, submodule = module.partition(".")
+        if root in _LEGACY_MODULE_ALIASES:
+            module = _LEGACY_MODULE_ALIASES[root] + dot + submodule
+        return super().find_class(module, name)
+
+
 def load_data(path_or_filename: Union[str, Path]):
     """Loads data object via `pickle`.
 
@@ -191,7 +207,7 @@ def load_data(path_or_filename: Union[str, Path]):
     """
 
     with open(path_or_filename, "rb") as file:
-        data = pickle.load(file)
+        data = _LegacyUnpickler(file).load()
 
         if isinstance(data, (SolutionData, EigenmodeData)):
             # Cast arrays to jax arrays
