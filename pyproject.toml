@@ -21,6 +21,11 @@ python        = ">=3.10,<3.12"
 jax-md        = { git = "https://github.com/GiovanniBordiga/jax-md.git", branch = "main" }
 nlopt         = "^2.7.1"
 opencv-python = "^4.5.5"
+# pandas 1.x ships binaries built against the numpy 1.x ABI, and its metadata
+# does not declare that upper bound, so the resolver is free to pair it with
+# numpy 2 and produce an environment where `import pandas` raises
+# "numpy.dtype size changed". jax >= 0.6 requires numpy >= 1.26.
+numpy         = ">=1.26,<2"
 pandas        = "^1.4.4"
 matplotlib    = "^3.5.0"
 SciencePlots  = "^1.0.9"

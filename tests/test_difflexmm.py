@@ -174,3 +174,18 @@ def test_frame_invariance_ligament_energy():
     )
 
     assert jnp.all(zero_energies < 1.e-30)
+
+
+def test_third_party_dependencies_are_abi_compatible():
+    """Binary wheels can be paired with an incompatible numpy by the resolver
+    without any metadata conflict, which surfaces only on import (e.g. pandas 1.x
+    against numpy 2: "numpy.dtype size changed"). Importing the compiled direct
+    dependencies keeps that out of the lock file."""
+    import cv2  # noqa: F401
+    import matplotlib  # noqa: F401
+    import nlopt  # noqa: F401
+    import numpy  # noqa: F401
+    import pandas  # noqa: F401
+    import shapely  # noqa: F401
+
+    from jax_md import smap  # noqa: F401
