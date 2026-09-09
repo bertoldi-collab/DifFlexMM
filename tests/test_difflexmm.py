@@ -189,3 +189,20 @@ def test_third_party_dependencies_are_abi_compatible():
     import shapely  # noqa: F401
 
     from jax_md import smap  # noqa: F401
+
+
+def test_load_data_legacy_module_alias():
+    """Data published on Zenodo predates the rename of the package from
+    `blockymetamaterials` to `difflexmm`, so those pickles name the old module.
+    `load_data` must still resolve them."""
+    from pathlib import Path
+
+    from difflexmm.utils import SolutionData, load_data
+
+    fixture = Path(__file__).parent / "fixtures" / "legacy_module_solution_data.pkl"
+    data = load_data(fixture)
+
+    assert isinstance(data, SolutionData)
+    assert data.block_centroids.shape == (3, 2)
+    assert data.fields.shape == (4, 2, 3, 1)
+    assert jnp.allclose(data.timepoints, jnp.linspace(0.0, 1.0, 4))
