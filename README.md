@@ -67,12 +67,32 @@ The framework has been used to design a variety of mechanical metamaterials with
 | 🌟🛡️ | Switching between focusing and protection task | [Quads](notebooks/quads_focusing_vs_protection_static_tuning_3dp_pla_shims.ipynb) | [Quads](data/quads_focusing_vs_protection_static_tuning_3dp_pla_shims) | [Quads](https://github.com/bertoldi-collab/DifFlexMM/assets/16863374/ad4f9811-e623-4867-af42-c36ee31bcfbb) |
 | 🌀 | Nonlinear motion conversion | [Quads](notebooks/quads_spin_3dp_pla_shims.ipynb) | [Quads](data/quads_spin_3dp_pla_shims) | [Quads](https://github.com/bertoldi-collab/DifFlexMM/assets/16863374/9aa2bbc9-cbe0-4896-8c83-ce67f2c61af3) |
 
-💾 All data generated or used for the paper can be downloaded from [![DOI](https://img.shields.io/badge/Data-10.5281/zenodo.12823471-blue?logo=zenodo&logoColor=ecf0f1&labelColor=34495e)](https://doi.org/10.5281/zenodo.12823471).
+## 💾 Optimization and experimental data
+
+> [!IMPORTANT]
+> Install the [package along with the examples](#difflexmm-with-examples-of-solved-design-problems) to visualize the data and notebooks.
+
+All data generated or used for the paper can be downloaded from
+[![DOI](https://img.shields.io/badge/Data-10.5281/zenodo.12823471-blue?logo=zenodo&logoColor=ecf0f1&labelColor=34495e)](https://doi.org/10.5281/zenodo.12823471).
 To access and visualize the data:
 
-- Extract `data.zip` in the root directory of the repository.
-- Load and visualize optimization results for all the solved problems using the provided [notebooks](notebooks).
-- Load and visualize experimental data using the notebooks in the [exp](exp) folder.
+- Download the archive from Zenodo.
+- Extract the contents into the root directory of the repository.
+- Use the [notebooks](notebooks) to load and visualize optimization results for all the solved problems.
+- Explore experimental results under [exp](exp).
+
+Once the data is in place, the folder tree should look like this:
+
+```
+DifFlexMM/
+├── data/
+├── difflexmm/
+├── exp/
+├── notebooks/
+├── out/
+├── problems/
+...
+```
 
 ## ⬇️ Installation
 
