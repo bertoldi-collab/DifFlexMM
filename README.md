@@ -134,7 +134,7 @@ If you use this code in your research or anywhere, please cite the paper:
 
 ```bibtex
 @article{bordiga2024automated,
-    title   = {Automated Discovery of Reprogrammable Nonlinear Dynamic Metamaterials},
+    title   = {Automated discovery of reprogrammable nonlinear dynamic metamaterials},
     author  = {Bordiga, Giovanni and Medina, Eder and Jafarzadeh, Sina and B{\"o}sch, Cyrill and Adams, Ryan P. and Tournat, Vincent and Bertoldi, Katia},
     year    = {2024},
     journal = {Nature Materials},
